@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_puthexa.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arojas-a <arojas-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/03 13:32:19 by arojas-a          #+#    #+#             */
-/*   Updated: 2024/07/08 17:12:59 by arojas-a         ###   ########.fr       */
+/*   Created: 2024/07/08 16:40:59 by arojas-a          #+#    #+#             */
+/*   Updated: 2024/07/08 17:13:43 by arojas-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <stdarg.h>
-# include <unistd.h>
+int	ft_puthexa(unsigned long nb)
+{
+	char	*base;
+	int		count;
 
-// BORRAR ANTES DE ENTREGAR
-int main(void);
-// FT_PRINTF
-int	ft_printf(const char *str, ...);
-int	ft_putchar(char c);
-int	ft_putstr(char *str);
-int ft_puthexa(unsigned long nb);
-
-#endif
+	count = 0;
+	base = "0123456789abcdef";
+	if (nb >= 16)
+	{
+		count += ft_puthexa(nb / 16);
+		count += ft_puthexa(nb % 16);
+	}
+	else
+		count += ft_putchar(base[nb % 16]);
+	return (count);
+}

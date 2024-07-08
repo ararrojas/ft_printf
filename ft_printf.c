@@ -6,12 +6,12 @@
 /*   By: arojas-a <arojas-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 13:30:31 by arojas-a          #+#    #+#             */
-/*   Updated: 2024/07/08 15:33:02 by arojas-a         ###   ########.fr       */
+/*   Updated: 2024/07/08 17:16:14 by arojas-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-static int	ft_check_type(va_list args, char c)
+static int	check_type(va_list args, char c)
 {
 	int	count;
 	
@@ -21,7 +21,10 @@ static int	ft_check_type(va_list args, char c)
 	else if (c == 's')
 		count += ft_putstr(va_arg(args, char *));
 	else if (c == 'p')
-		count += ft_puthexa(va_arg(arg, int));
+	{
+		count = ft_putstr("0x");
+		count += ft_puthexa(va_arg(args, unsigned long int));
+	}
 	return (count);
 }
 
@@ -39,7 +42,7 @@ int	ft_printf(char const *str, ...)
 		if (str[i] == '%')
 		{
 		if (str[i + 1] != '\0')
-			count += ft_check_type(args, str[++i]);
+			count += check_type(args, str[++i]);
 		}
 		else
 			count += ft_putchar(str[i]);
