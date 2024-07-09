@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   print_pointer.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arojas-a <arojas-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 14:44:01 by arojas-a          #+#    #+#             */
-/*   Updated: 2024/07/08 15:12:21 by arojas-a         ###   ########.fr       */
+/*   Created: 2024/07/09 11:46:14 by arojas-a          #+#    #+#             */
+/*   Updated: 2024/07/09 12:23:28 by arojas-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-int	ft_putstr(char *str)
+int	print_pointer(unsigned long long ptr)
 {
-	int	i;
+	int	count;
 
-	if (str == NULL)
-		return (write(1, "(null)", 6));
-	i = 0;
-	while (str[i])
+	count = 0;
+	if (ptr == 0)
+		count += print_char('0');
+	else
 	{
-		ft_putchar(str[i]);
-		i++;
+		if (ptr >= 16)
+		{
+			count += print_pointer(ptr / 16);
+			count += print_pointer(ptr % 16);
+		}
+		else
+		{
+			if (ptr < 10)
+				count += print_char(ptr + 48);
+			else
+				count += print_char(ptr - 10 + 'a');
+		}
 	}
-	return (i);
+	return (count);
 }

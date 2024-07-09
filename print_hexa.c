@@ -1,17 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   print_hexa.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arojas-a <arojas-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 13:34:25 by arojas-a          #+#    #+#             */
-/*   Updated: 2024/07/08 14:46:05 by arojas-a         ###   ########.fr       */
+/*   Created: 2024/07/08 16:40:59 by arojas-a          #+#    #+#             */
+/*   Updated: 2024/07/09 13:16:42 by arojas-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-int	ft_putchar(char c)
+int	print_hexa(unsigned long nb, const char c)
 {
-	return (write(1, &c, 1));
+	int		count;
+
+	count = 0;
+	if (nb == 0)
+		count += print_char('0');
+	if (nb >= 16)
+	{
+		count += print_hexa(nb / 16, c);
+		count += print_hexa(nb % 16, c);
+	}
+	else
+	{
+		if (nb < 10)
+			count += print_char(nb + 48);
+		else
+		{
+			if (c == 'x')
+				count += print_char(nb - 10 + 'a');
+			if (c == 'X')
+				count += print_char(nb - 10 + 'A');
+		}
+	}
+	return (count);
 }

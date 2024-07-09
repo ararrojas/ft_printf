@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puthexa.c                                       :+:      :+:    :+:   */
+/*   print_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arojas-a <arojas-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 16:40:59 by arojas-a          #+#    #+#             */
-/*   Updated: 2024/07/08 17:13:43 by arojas-a         ###   ########.fr       */
+/*   Created: 2024/07/08 14:44:01 by arojas-a          #+#    #+#             */
+/*   Updated: 2024/07/09 13:02:37 by arojas-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-int	ft_puthexa(unsigned long nb)
+int	print_str(char *str)
 {
-	char	*base;
-	int		count;
+	int	i;
 
-	count = 0;
-	base = "0123456789abcdef";
-	if (nb >= 16)
+	if (str == NULL)
+		return (print_str("(null)"));
+	i = 0;
+	while (str[i])
 	{
-		count += ft_puthexa(nb / 16);
-		count += ft_puthexa(nb % 16);
+		print_char(str[i]);
+		i++;
 	}
-	else
-		count += ft_putchar(base[nb % 16]);
-	return (count);
+	return (i);
 }
