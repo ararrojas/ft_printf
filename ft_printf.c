@@ -6,7 +6,7 @@
 /*   By: arojas-a <arojas-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 13:30:31 by arojas-a          #+#    #+#             */
-/*   Updated: 2024/07/10 13:18:52 by arojas-a         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:19:50 by arojas-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -24,10 +24,7 @@ static int	check_type(va_list args, char c, int *count)
 	else if (c == 'x' || c == 'X')
 		print_hexa(va_arg(args, unsigned int), c, count);
 	else if (c == 'p')
-	{
-		print_str("0x", count);
 		print_pointer(va_arg(args, unsigned long), count);
-	}
 	if (c == '%')
 		print_char('%', count);
 	return (0);
