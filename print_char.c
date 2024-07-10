@@ -6,12 +6,16 @@
 /*   By: arojas-a <arojas-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 10:44:36 by arojas-a          #+#    #+#             */
-/*   Updated: 2024/07/09 13:03:36 by arojas-a         ###   ########.fr       */
+/*   Updated: 2024/07/10 12:36:14 by arojas-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-int	print_char(char ch)
+void	print_char(char ch, int *count)
 {
-	return (write(1, &ch, 1));
+	int	check;
+
+	check = write(1, &ch, 1);
+	if (check == 1)
+		(*count)++;
 }

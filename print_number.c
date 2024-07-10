@@ -6,46 +6,42 @@
 /*   By: arojas-a <arojas-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 10:19:56 by arojas-a          #+#    #+#             */
-/*   Updated: 2024/07/09 13:02:03 by arojas-a         ###   ########.fr       */
+/*   Updated: 2024/07/10 12:10:11 by arojas-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-int	print_number(int nb)
+void	print_number(int nb, int *count)
 {
-	int	count;
-
-	count = 0;
 	if (nb == -2147483648)
-		return (write(1, "-2147483648", 11));
+	{
+		write(1, "-2147483648", 11);
+		(*count) += 11;
+		return ;
+	}
 	if (nb < 0)
 	{
-		count += print_char('-');
-		nb *= -1;
+		print_char('-', count);
+		print_number((nb * -1), count);
 	}
 	if (nb > 9)
 	{
-		count += print_number(nb / 10);
-		count += print_number(nb % 10);
+		print_number((nb / 10), count);
+		print_number((nb % 10), count);
 	}
 	else
-		count += print_char(nb + 48);
-	return (count);
+		print_char((nb + 48), count);
 }
 
-int	print_unsigned(unsigned int n)
+void	print_unsigned(unsigned int n, int *count)
 {
-	int	count;
-
-	count = 0;
 	if (n == 0)
-		count += print_char('0');
+		print_char('0', count);
 	if (n > 9)
 	{
-		count += print_unsigned(n / 10);
-		count += print_unsigned(n % 10);
+		print_unsigned((n / 10), count);
+		print_unsigned((n % 10), count);
 	}
 	else
-		count += print_char(n + 48);
-	return (count);
+		print_char((n + 48), count);
 }

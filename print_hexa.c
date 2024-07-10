@@ -6,34 +6,29 @@
 /*   By: arojas-a <arojas-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:40:59 by arojas-a          #+#    #+#             */
-/*   Updated: 2024/07/09 13:16:42 by arojas-a         ###   ########.fr       */
+/*   Updated: 2024/07/10 13:11:09 by arojas-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-int	print_hexa(unsigned long nb, const char c)
+void	print_hexa(unsigned int nb, const char c, int *count)
 {
-	int		count;
+	char	*base;
 
-	count = 0;
 	if (nb == 0)
-		count += print_char('0');
-	if (nb >= 16)
-	{
-		count += print_hexa(nb / 16, c);
-		count += print_hexa(nb % 16, c);
-	}
+		print_char('0', count);
 	else
 	{
-		if (nb < 10)
-			count += print_char(nb + 48);
+		if (c == 'x')
+			base = "0123456789abcdef";
 		else
+			base = "0123456789ABCDEF";
+		if (nb >= 16)
 		{
-			if (c == 'x')
-				count += print_char(nb - 10 + 'a');
-			if (c == 'X')
-				count += print_char(nb - 10 + 'A');
+			print_hexa((nb / 16), c, count);
+			print_hexa((nb % 16), c, count);
 		}
+		else
+			print_char(base[nb], count);
 	}
-	return (count);
 }
